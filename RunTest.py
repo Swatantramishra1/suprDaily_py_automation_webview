@@ -1,22 +1,21 @@
 import unittest
 import argparse
 import sys
+
 from driverutil.Browser import Browser
-from pageobjects.GoogleSearchPage import GoogleSearchPage
-from pageobjects.SearchResultsPage import SearchResultsPage
+from pages.loginPage import LoginPage
 
 
 class RunTest(unittest.TestCase):
 
     def setUp(self):
         self.driver = Browser().getbrowser(browsername)
-        self.driver.get("https://www.google.com/")
-        self.googlesearchpage = GoogleSearchPage(self.driver)
-        self.searchresultspage = SearchResultsPage(self.driver)
+        self.driver.get("http://localhost:3000")
+        self.loginPage = LoginPage(self.driver)
 
     def testExample(self):
-        self.googlesearchpage.searchfor("Selenium")
-        self.searchresultspage.link_selenium_present()
+        self.loginPage.suprLogin()
+        self.loginPage.suprLogout()
 
     def tearDown(self):
         self.driver.quit()
